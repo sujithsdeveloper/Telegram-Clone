@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:telegram_clone/utils/color_constants.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -18,21 +19,22 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final controller = TextEditingController();
+
+  final box = Hive.box('AppData');
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
     return Scaffold(
       bottomNavigationBar: Padding(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Container(
           child: Row(
-            children: [
+            children: <Widget>[
               Expanded(
                 child: TextField(
                   controller: controller,
                   onChanged: (value) {
-                    controller.text.isEmpty ? null : buildSendIcon();
                     setState(() {});
                   },
                   decoration: InputDecoration(
@@ -51,20 +53,28 @@ class _ChatScreenState extends State<ChatScreen> {
               Container(
                 color: Colors.white,
                 height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.attach_file,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(width: 10),
-                    Icon(
-                      Icons.mic,
-                      color: Colors.grey,
-                    ),
-                  ],
-                ),
+                child: controller.text.isNotEmpty
+                    ? IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.send,
+                          color: Colors.blue,
+                        ),
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.attach_file,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: 10),
+                          Icon(
+                            Icons.mic,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
               ),
             ],
           ),

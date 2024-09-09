@@ -12,7 +12,6 @@ class TabControllerSample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      
         length: 3,
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
@@ -28,10 +27,15 @@ class TabControllerSample extends StatelessWidget {
           drawer: Drawer(
             child: Column(
               children: [
-                Spacer(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Row(
@@ -78,7 +82,7 @@ class TabControllerSample extends StatelessWidget {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.75,
+                      height: MediaQuery.sizeOf(context).height - 198,
                       color: Colors.white,
                       child: Column(
                         children: List.generate(
@@ -131,9 +135,7 @@ class TabControllerSample extends StatelessWidget {
             ),
             backgroundColor: ColorConstants.primaryColor,
             bottom: TabBar(
-
                 dividerColor: Colors.white,
-                
                 indicatorColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.label,
                 labelColor: Colors.white,
