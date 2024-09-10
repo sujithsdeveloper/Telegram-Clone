@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telegram_clone/dummy_db.dart';
+import 'package:telegram_clone/utils/color_constants.dart';
 import 'package:telegram_clone/view/chat_screen/chat_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,11 +16,11 @@ class HomeScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ChatScreen(
-                          name: DummyDb.chatList[index]['name']!,
-                          time: DummyDb.chatList[index]['time']!,
-                          bgimage: DummyDb.chatList[index]['url']!,
-                          ),
-
+                        name: DummyDb.chatList[index]['name']!,
+                        time: DummyDb.chatList[index]['time']!,
+                        bgimage: DummyDb.chatList[index]['url']!,
+                        index: index,
+                      ),
                     )),
                 child: ListTile(
                   leading: CircleAvatar(
@@ -29,7 +30,22 @@ class HomeScreen extends StatelessWidget {
                   ),
                   title: Text(DummyDb.chatList[index]['name']!),
                   subtitle: Text(DummyDb.chatList[index]['message']!),
-                  trailing: Text(DummyDb.chatList[index]['time']!),
+                  trailing: Column(
+                    children: [
+                      Text(DummyDb.chatList[index]['time']!),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: ColorConstants.primaryColor,
+                        radius: 12,
+                        child: Text(
+                          DummyDb.chatList[index]['messageNumber']!,
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
           separatorBuilder: (context, index) => SizedBox(),

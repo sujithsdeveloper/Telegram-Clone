@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:telegram_clone/dummy_db.dart';
 import 'package:telegram_clone/utils/color_constants.dart';
 import 'package:telegram_clone/utils/image_constants.dart';
+import 'package:telegram_clone/widgets/profilePopupMenuButton.dart';
 import 'package:telegram_clone/widgets/settingsWidget.dart';
 
-class Settings extends StatelessWidget {
-  const Settings({super.key});
+class Chatprofilescreen extends StatelessWidget {
+   Chatprofilescreen({super.key,required this.bgimage,required this.name});
+
+  String bgimage;
+  String name;
 
   @override
   Widget build(BuildContext context) {
@@ -19,81 +23,7 @@ class Settings extends StatelessWidget {
                   Icons.qr_code,
                   color: Colors.white,
                 ),
-                PopupMenuButton(
-                  iconColor: Colors.white,
-                  color: Colors.white,
-                  position: PopupMenuPosition.under,
-                  itemBuilder: (context) {
-                    return [
-                      PopupMenuItem(
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.edit,
-                            ),
-                            SizedBox(width: 9),
-                            Text(
-                              'Edit info',
-                              style: TextStyle(color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                          child: Row(
-                        children: [
-                          Icon(
-                            Icons.brush_outlined,
-                          ),
-                          SizedBox(width: 9),
-                          Text(
-                            'Edit Profile Color',
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
-                      PopupMenuItem(
-                          child: Row(
-                        children: [
-                          Icon(
-                            Icons.camera_alt_rounded,
-                          ),
-                          SizedBox(width: 9),
-                          Text(
-                            'Set Profile Photo',
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
-                      PopupMenuItem(
-                          child: Row(
-                        children: [
-                          Icon(
-                            Icons.save_alt_sharp,
-                          ),
-                          SizedBox(width: 9),
-                          Text(
-                            'Save to Gallery',
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
-                      PopupMenuItem(
-                          child: Row(
-                        children: [
-                          Icon(
-                            Icons.delete_outline,
-                          ),
-                          SizedBox(width: 9),
-                          Text(
-                            'Delete',
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
-                    ];
-                  },
-                )
+                profilePopupMenuButton()
               ],
               stretch: true,
               pinned: true,
@@ -101,9 +31,7 @@ class Settings extends StatelessWidget {
               expandedHeight: 300,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image(
-                  image: AssetImage(
-                    ImageConstants.PROFILE_PHOTO,
-                  ),
+                  image: AssetImage(bgimage),
                   fit: BoxFit.cover,
                 ),
                 title: LayoutBuilder(
@@ -268,3 +196,4 @@ class Settings extends StatelessWidget {
         ));
   }
 }
+

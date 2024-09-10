@@ -5,7 +5,7 @@ import 'package:telegram_clone/view/splash_screen/splash_screen.dart';
 void main() async{
 WidgetsFlutterBinding.ensureInitialized();
  await Hive.initFlutter();
-  final box=await Hive.openBox('AppData');
+  await Hive.openBox<String>('chatBox');
   runApp(const MyApp());
 }
 
